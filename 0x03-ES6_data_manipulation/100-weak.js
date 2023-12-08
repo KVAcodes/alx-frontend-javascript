@@ -4,10 +4,11 @@ export function queryAPI(endpoint) {
   if (!weakMap.has(endpoint)) {
     weakMap.set(endpoint, 1);
   } else {
-    const curr = weakMap.get(endpoint);
+    let curr = weakMap.get(endpoint);
+    curr += 1;
     if (curr >= 5) {
       throw new Error('Endpoint load is high');
     }
-    weakMap.set(endpoint, curr + 1);
+    weakMap.set(endpoint, curr);
   }
 }
